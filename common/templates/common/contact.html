@@ -1,0 +1,63 @@
+{% extends 'common/base.html' %}
+{% load static%}
+
+{% block css%}
+{{ block.super }}
+<link rel="stylesheet" href="{% static '/css/contact.css' %}">
+
+{% endblock css %}
+{% block content %}
+<section id="contact">
+    <div class="container p-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-12">
+                <div class="card card-body shadow border-0">
+                    <div class="row">
+<!-- head part -->
+                        <div class="col-lg-5 col-sm-12">
+                            <div class="head p-4">
+                                <h1>Contact Us</h1>
+                                <p class="mt-5"><i class="bi bi-geo-alt-fill me-3"></i>Calicut</p>
+                                <p class="mt-5"><i class="bi bi-phone-fill me-3"></i>+91 9645312745</p>
+
+                                <p class="mt-5"><i class="bi bi-envelope-fill me-3"></i>kokoblack@gmail.com</p>
+
+                            </div>
+                        </div>
+
+                        
+<!-- form part -->
+                        <div class="col-lg-7 col-sm-12 ">
+                            <form method="POST" >
+                                {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="formGroupExampleInput2" class="form-label fw-bold">Name</label>
+                                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter your name" name="name">
+                            </div>
+                            <div class="mb-3">
+                                <label for="exampleFormControlInput1" class="form-label fw-bold">Email address</label>
+                                <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" name="email">
+                              </div>
+                              <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label fw-bold">Comments</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="review" placeholder="Write your review about kokoblack"></textarea>
+                              </div>
+                              <div class="col-12">
+                                <button type="submit" class="btn btn-dark btn">Send</button>
+                              </div>
+                </form>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+
+{% endblock content %}
+

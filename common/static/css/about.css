@@ -1,0 +1,12 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+#about {
+    color: brown;
+}
+#about h1{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+}

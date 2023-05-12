@@ -1,0 +1,121 @@
+
+{% extends 'common/base.html' %}
+{% load static %}
+{% block header %}
+
+{% endblock%} 
+{{block.super}}
+
+
+{% block content%}
+
+
+
+
+<div class="container mt-5">
+    <div class="main-body  mt-5">
+
+        <!-- Breadcrumb -->
+
+        <!-- /Breadcrumb -->
+
+        <div class="row gutters-sm">
+            <div class="col-md-5 mb-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="{% static '/images/demo.png' %}" alt="" class="rounded-circle" width="100">
+                            <div class="mt-3">
+                                <h1 style="color: brown;">Hello,{{customer_details.customer_name | upper }} </h1>
+                                <!-- <p class="text-secondary mb-1">Full Stack Developer</p> -->
+                                <!-- <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p> -->
+                                <!-- <a href=""><button class="btn btn-primary">Edit</button></a> -->
+                                
+                                <!-- <button class="btn btn-outline-primary">Message</button> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- edit  -->
+
+                <div class="card mt-3">
+                    <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="{% url 'common:my_orders' %}" class="text-decoration-none fw-bold"><h4 class="mb-0">Your Orders</h4></a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="{% url 'common:change_password' %}"  class="text-decoration-none"> <h4 class="mb-0">Change Password</h4></a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href="{% url 'common:shop' %}"  class="text-decoration-none"><h4 class="mb-0">Buy Again</h4></a>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <a href=""  class="text-decoration-none"> <h4 class="mb-0">Your Addresses</h4></a>
+                            </li>
+                        
+                    </ul>
+                </div>
+
+                <!-- edit  -->
+
+
+            </div>
+            <div class="col-md-7">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Full Name</h6>
+                            </div>
+                            <div class="col-sm-9 text-dark fw-bold">
+                               {{customer_details.customer_name | upper }} 
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{customer_details.email}}
+                            </div>
+                        </div>
+                        <!-- <hr> -->
+                        
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Mobile</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                               {{customer_details.phone}}
+                            </div>
+                        </div>
+                        <hr>
+                       
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">Address</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                            {{customer_details.address}}
+                            
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a class="btn btn-warning " target="__blank" href="{% url 'common:edit_profile' %}">Edit</a> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock content%}

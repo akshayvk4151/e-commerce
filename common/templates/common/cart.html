@@ -1,0 +1,174 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block header %}
+
+{% endblock%} 
+{{block.super}}
+
+
+{% block content%}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body onload="">
+  {% csrf_token %}
+  
+
+
+  <table class="table bg-light">
+    <thead>
+      <tr>
+        <th scope="col">sl.no.</th>
+        <th scope="col">Product image</th>
+        <th scope="col">Product</th>
+        <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">TotalPrice</th>
+        <th scope="col"></th>
+
+      </tr>
+    </thead>
+    <tbody>
+      
+   {% for product in cart_items %}
+
+   <tr>
+
+      <td>{{ forloop.counter }}</td>
+      <td><img src="{{ product.product.image.url }}"  height="100px" alt=""></td>
+      <td>{{ product.product.product_name }}</td>
+      <td >₹ {{ product.product.price }}
+        <input type="number" name="" value="{{product.product.price}}" id="price_{{product.product.id}}" hidden>
+
+      </td>
+      
+
+      <td><input type="number" min="1" value="{{ product.qty }}" class="update-qty" max="" data-item ="{{ product.product.id }}"  id="qty_{{product.product.id}}" >
+          <span id="out_{{product.product.id}}" ></span>
+      
+      </td>
+      
+      <td ><span id="total_{{product.product.id}}">₹{{product.total_price}}</span></td>
+
+      <td><a href="{% url 'common:remove_cart' product.id %}" type="button" class="btn btn-danger">Remove</a></td>
+     
+      
+</tr>
+
+  {% endfor %}
+
+  
+</tbody>
+</table>
+
+
+<div style="margin-left: 500px;background-color: brown;">
+
+<table class="table text-white" >
+
+
+  <tr>
+    <th>Grand Total </th>
+    <td><span id="grand_total" style="font-weight: bolder;">Rs .{{Gtotal}}</span></td>
+  </tr>
+
+</table>
+
+</div>
+<div class="d-grid gap-2 col-4 ms-auto mb-5 me-5">
+<a href="{% url 'common:order_details' %}" class="btn btn-dark" type="button">PROCEED TO CHECKOUT</a>
+</div>
+
+
+
+
+<script>
+  $(document).ready(function(){
+    $.ajaxSetup({
+								headers: {
+								  "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+								}
+							  })
+                $(document).on('change','.update-qty',function(){
+							
+
+							  
+              var id = $(this).attr('data-item')
+
+              var qty = $("#qty_"+id).val()
+
+              var price = $('#price_'+id).val()
+
+              console.log(id,qty ,price)
+
+              $.ajax({
+                type: 'POST',
+                  url: "{% url 'common:change_qty' %}",
+                  data: {
+                'quantity': qty,
+                'p_id' :id
+                  },
+
+                  success: function (response) {
+                  console.log(response.status)
+
+                  if(response.status == true)
+                  
+                  {
+                    sub = 	qty * price
+                  $('#total_'+id).text(sub)
+                  $('#grand_total').text(response.data)
+                  $('#out_'+id).text("")
+                  }
+                  
+                  else if(response.status == false){
+
+                    $('#out_'+id).css('color','red')
+                    $('#out_'+id).text("out of stock")
+
+                  }																	
+
+                  // console.log(sub)
+            
+              }							
+                
+                })
+                
+              
+              })
+
+
+    
+
+
+  })
+
+
+  
+  
+  </script>
+  
+
+    
+
+</body>
+</html>
+
+
+
+     
+
+
+
+
+
+
+
+{% endblock%} 

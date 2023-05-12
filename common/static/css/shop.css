@@ -1,0 +1,8 @@
+#product{
+    background: #e5e5e5;
+}
+#product .card:hover{
+    transform: scale(1.05);
+    
+
+}

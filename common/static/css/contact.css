@@ -1,0 +1,21 @@
+.head{
+    background-color: brown;
+    color: white;
+    margin-left: -80px;
+    /* border-radius: 10px 0 0 10px; */
+}
+.head h1{
+    font-size: 30px ;
+    border-bottom: 3px;
+    font-weight: 800;
+    position: relative;
+    margin-bottom: 0;
+}
+.head h1::before{
+    content: '';
+    height: 3px;
+    width: 70px;
+    background-color: white;
+    position: absolute;
+    bottom: -10px;
+}

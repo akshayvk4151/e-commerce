@@ -1,0 +1,31 @@
+{% extends 'common/base.html' %}
+{% load static%}
+
+{% block css%}
+{{ block.super }}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock css %}
+{% block content %}
+
+<section id="about">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-12  my-5 px-5">
+            <img src="{% static 'image/koko3.jpg' %}" alt="" class="img-fluid mt-5" width="80%" style="border-radius: 10%;">
+
+        </div>
+        <div class="col-lg-6 col-md-6 col-12 p-5 my-5">
+            <h1>ABOUT US</h1>
+            <p>To become the first choice of customer for dates, dry fruits, nuts and other precious items in fruits and vegetables along with imported drinks and wines by bringing the freshest and highest quality to maximum number of customers through our own shops across India. Our priority lies with consistently keeping up our customers by serving them the products without compromising the level of quality.<br>We endeavour to achieve our vision by following international standards of quality, right from selection till after sales service. For that we have our own dates farm in the Middle East and we cultivate and sale pure organic dates in 40 + varieties. On the other hand we import fine quality Nuts, dry fruits, exotic fruits, vegetables and drinks from the source from which they are available at their best.</p>
+        </div>
+    </div>
+</div>
+
+
+</section>
+
+
+
+
+{% endblock content %}
+

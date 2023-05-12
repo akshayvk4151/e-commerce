@@ -1,0 +1,106 @@
+{% extends 'common/base.html' %}
+{% load static%}
+
+{% block css%}
+
+{{ block.super}}
+
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock css %}
+
+
+
+{% block content %}
+<section id="home">
+   <div class="row">
+      <div class="col-lg-6 col-sm-12">
+         <h1>TASTE AND TRUST <br>
+         <span>PRESERVED FOREVER!</span>
+         </h1>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-lg-6 col-sm-12">
+         <div class="shopnow ">
+            <a href="{% url 'common:shop' %}" class="btn-group-sm"><button type="button" class="btn">Shop now</button></a>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- carosal section -->
+<div id="carouselExampleIndicators" class="carousel slide m-5" data-bs-ride="carousel">
+   <div class="carousel-indicators">
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+   </div>
+   <div class="carousel-inner">
+     <div class="carousel-item active">
+       <img src="{% static 'image/carosal4.jpg' %}" class=" slide d-block w-100" alt="..." height="500px">
+     </div>
+     <div class="carousel-item">
+       <img src="{% static 'image/carosal2.jpg' %}" class=" slide d-block w-100" alt="..."  height="500px">
+     </div>
+     <div class="carousel-item">
+       <img src="{% static 'image/carosal5.jpg' %}" class=" slide d-block w-100" alt="..." height="500px">
+     </div>
+   </div>
+   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Previous</span>
+   </button>
+   <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+     <span class="visually-hidden">Next</span>
+   </button>
+ </div>
+
+ <!-- product section -->
+
+ <div>
+  <div class="row pt-4 align-items-center gy-4  ">
+  
+    {% for product in products %}
+    
+        <div class="col-lg-3 col-md-6 col-sm-12 mx-sm-auto">
+          <form method="POST">
+            {% csrf_token %}
+          <a href="{% url 'common:product_detailes' product.id %}" class=" text-decoration-none">
+
+                 <input type="hidden" name="pid" value="{{product.id}}" id="">
+
+            <div class="card " style="width: 16rem;">
+             <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap" height="300px">
+              <div class="card-body">
+               <h5 class="card-title text-dark text-decoration-none">{{ product.product_name }}</h5>
+               <p class="card-text text-warning">Rs . {{ product.price }}</p>
+    
+               <button class="btn btn-dark mt-3">Add to Cart</button>
+      <!-- <h6 class="text-danger text-center bg-white">{{ error }}</h6><br> -->
+
+              </div>
+            </div>
+          </a>
+          </form>
+          
+        </div>
+    
+    {% endfor %}
+      
+  </div>
+
+  <div class="d-grid gap-2 col-6 mx-auto mt-5 mb-5">
+    <a href="{% url 'common:shop' %}" class="btn btn-dark" type="button">shop more</a>
+  </div>
+ </div>
+ 
+
+
+
+
+
+
+
+
+{% endblock content %}

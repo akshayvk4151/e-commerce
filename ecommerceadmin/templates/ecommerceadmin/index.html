@@ -1,0 +1,105 @@
+{% extends 'ecommerceadmin/base.html' %}
+{% load static %}
+{% block header %}
+
+{% endblock%} 
+{{block.super}}
+
+
+{% block content%}
+
+
+
+<main class="mt-3 pt-3">
+
+  <div class="row g-2 mx-2">
+    <div class="col-md-3 ">
+      <div class="bg-dark p-3 d-flex text-white shadow-sm justify-content-around align-items-center rounded">
+        <div class="me-5">
+          <h3>{{p_count}}</h3>
+          <p>Products</p>
+        </div>
+        <i class="fas fa-gift fs-1 p-3"></i>
+
+      </div>
+    </div>
+
+    <div class="col-md-3 ">
+      <div class="bg-dark p-3 d-flex text-white shadow-sm justify-content-around align-items-center rounded">
+        <div class="me-5">
+          <h3>{{o_count}}</h3>
+          <p>Sales</p>
+        </div>
+        <i class="fas fa-hand-holding-dollar fs-1 p-3"></i>
+
+      </div>
+    </div>
+
+    <div class="col-md-3 ">
+      <div class="bg-dark p-3 d-flex text-white shadow-sm justify-content-around align-items-center rounded">
+        <div class="me-5">
+          <h3>{{c_count}}</h3>
+          <p>Customers</p>
+        </div>
+        <i class="fas fa-users fs-1 p-3"></i>
+
+      </div>
+    </div>
+
+    <div class="col-md-3 ">
+      <div class="bg-dark p-3 d-flex text-white shadow-sm justify-content-around align-items-center rounded">
+        <div class="me-5">
+          <h3>88%</h3>
+          <p>Increase</p>
+        </div>
+        <i class="fas fa-chart-line fs-1 p-3"></i>
+
+      </div>
+    </div>
+  </div>
+  <div class="row g-2 mx-2">
+    <h3 class="fs-4 mb-3">Recent Orders</h3>
+    <div class="col">
+      <table class="table table-dark table-striped table-hover shadow-sm rounded">
+        <thead>
+
+          <tr>
+            <th>Sl.No</th>
+            <th>Order Date</th>
+            <th>Product image</th>
+            <th>Product Name</th>
+
+            <th>Customer Name</th>
+            <th>Shipping Address</th>
+            <th>Qty</th>
+            <th>Total Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for i in orders%}
+
+          <tr>
+            <td>{{forloop.counter}}</td>
+            <td>{{i.date}}</td>
+            <td><img src="{{i.productid.image.url}}" alt="" height="100px"></td>
+            <td>{{i.productid.product_name}}</td>
+            <td>{{i.customer.customer_name}}</td>
+            <td>{{i.customer.address}}</td>
+            <td>{{i.quantity}}</td>
+            <td>{{i.order.amount}}</td>
+
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+{% endblock%} 

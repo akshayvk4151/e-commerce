@@ -1,0 +1,53 @@
+{% extends 'common/base.html' %}
+{% load static%}
+
+{% block css%}
+{{ block.super }}
+<link rel="stylesheet" href="{% static '/css/shop.css' %}">
+
+{% endblock css %}
+{% block content %}
+
+<section id="product">
+    <div class="container mb-5">
+
+
+      <div class="row pt-4 align-items-center gy-4  ">
+  
+        {% for product in products %}
+        
+            <div class="col-lg-3 col-md-6 col-sm-12 mx-sm-auto">
+              <form method="POST">
+                {% csrf_token %}
+              <a href="{% url 'common:product_detailes' product.id %}" class=" text-decoration-none">
+
+                     <input type="hidden" name="pid" value="{{product.id}}" id="">
+
+                <div class="card " style="width: 14rem;">
+                 <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap" height="270px">
+                  <div class="card-body">
+                   <h5 class="card-title text-dark text-decoration-none">{{ product.product_name }}</h5>
+                   <p class="card-text text-warning">Rs . {{ product.price }}</p>
+        
+                   <button class="btn btn-dark mt-3">Add to Cart</button>
+          <!-- <h6 class="text-danger text-center bg-white">{{ error }}</h6><br> -->
+
+                  </div>
+                </div>
+              </a>
+              </form>
+              
+            </div>
+        
+        {% endfor %}
+          
+      </div>
+      
+      
+    </div>
+
+</section>
+
+
+{% endblock content %}
+

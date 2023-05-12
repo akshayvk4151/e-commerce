@@ -1,0 +1,43 @@
+:root{
+    --offcanvas-width:270px;
+    --topnavbarheight:73px;
+}
+.sidebar-nav{
+    width: var(--offcanvas-width);
+    
+}
+@media (min-width:992px){
+    body{
+        overflow: auto !important;
+    }
+
+.offcanvas-backdrop::before{
+    display: none !important;
+}
+    
+
+.sidebar-nav{
+    transform: none;
+    visibility: visible !important;
+    top: var(--topnavbarheight);
+    height: calc(100%- var(--topnavbarheight));
+
+}
+main{
+    margin-left: var(--offcanvas-width);
+    /* margin-top: 500px; */
+}
+}
+
+
+.offcanvas-body .list-group .list-group-item{
+    border: none;
+    padding: 15px 30px;
+}
+
+
+
+
+
+
+

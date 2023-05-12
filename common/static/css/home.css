@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Gloria+Hallelujah&family=Kaisei+Tokumin:wght@400;500&family=Poppins:wght@300;400;500&display=swap');
+ *{
+    margin: 0;
+    padding: 0;
+    box-sizing: 0;
+}
+#home{
+    background-image:url("/static/image/main4.jpg") ;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* background-position: center; */
+
+
+}
+#home h1{
+color: rgba(165, 42, 42, 0.938);
+/* letter-spacing: 3px; */
+font-size: 50px;
+font-weight: bolder;
+position: absolute;
+top: 50%;
+left: 20px;
+font-family: 'Gloria Hallelujah',cursive;
+
+}
+#home span{
+font-size: 40px;
+color: black;
+}
+#home .shopnow{
+    color: rgba(165, 42, 42, 0.938);
+    position: absolute;
+    top: 71%;
+    left: 180px;
+}
+.shopnow button{
+    background-color: brown;
+    color: white;
+}
+.shopnow button:hover{
+        background-color: brown;
+        color: black;
+}
+img.slide{
+    height: 500px;
+}
+/* #view{
+    align-items: center;
+    position: relative;
+}
+#view a{
+    position: absolute;
+    left: 40%;
+
+} */

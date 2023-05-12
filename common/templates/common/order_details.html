@@ -1,0 +1,45 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block header %}
+
+{% endblock%} 
+{{block.super}}
+
+{% block content%}
+
+
+
+<section>
+    <div class="row m-5">
+        <div class="col-6">
+            <h3 class="" style="color: brown;">Shipping Address</h3>
+            <hr>
+            <p><b>Name :{{ customer.customer_name }}</b></p>
+            <p><b>Mobile :+91 {{ customer.phone }}</b></p>
+            <p><b>Email :{{ customer.email}}</b></p>
+            <br>
+            <p><b>Address : {{ customer.address}}</b></p>
+
+
+        </div>
+        <div class="col-6">
+             <h3 class="" style="color: brown;">Order Summary</h3>
+            <hr>
+           
+            <p><b> Total Price : Rs .{{ gtotal }}</b></p>
+
+
+
+
+        
+        </div>
+    </div>
+
+    <div class="d-grid gap-2 col-4 ms-auto mb-5 me-5 mt-5">
+        <a href="{% url 'common:payment' %}" class="btn btn-warning" type="button">PAYMENT</a>
+        </div>
+    
+</section>
+
+
+{% endblock content%}

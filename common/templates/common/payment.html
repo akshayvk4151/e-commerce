@@ -1,0 +1,151 @@
+{% extends 'common/base.html' %}
+{% load static %}
+{% block header %}
+
+{% endblock%} 
+{{block.super}}
+
+
+{% block content%}
+
+<h1 class="text-center" >Select a payment method</h1>
+<div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-2">
+                <!-- edit  -->
+            </div>
+            <div class="col-md-8">
+                <div class="card mb-3">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-sm-1" style="padding-left: 30px;">
+                                <input type="radio" name="payment" value="cod">
+                            </div>
+                            <div class="col-sm-11 text-secondary">
+                                Cash on delivery
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-1" style="padding-left: 30px;padding-top: 25px;">
+                                <input type="radio" name="payment" value="razorpay">
+                            </div>
+                            <div class="col-sm-4 text-secondary">
+                                <img src="{% static '/image/razorpay.png' %}" alt="" height="100px" width="300px">
+                            </div>
+
+                            <div class="col-sm-7 text-secondary" style="padding-top: 40px;">
+                                <b>Razorpay</b>
+                            </div>
+                        </div>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-sm-11"
+                                style="justify-content: center;justify-items: center;display: flex;">
+                            <!-- <form method="POST"> -->
+                                {% csrf_token %}
+                                <input type="hidden" value="{{name}}" id="hname">
+                                <input type="hidden" value="{{amount}}" id="hamount">
+                                <button class="btn btn-warning me-4" id="rzp-button1" href="{% url 'common:orderpayment' %}">continue</button>
+                            <!-- </form> -->
+                            </div>
+                            <div class="col-sm-1">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+<script>
+
+$(document).ready(function () {
+             $.ajaxSetup({
+                            headers: {
+                                "X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()
+                            }
+                        })
+
+                        $('#rzp-button1').click(function(){
+                            name = $('#hname').val()
+                            amount = $('#hamount').val()
+                            $.ajax({
+                                type: 'POST',
+                                url: "{% url 'common:orderpayment' %}",
+                                data: {
+                                    'name': name,
+                                    'total': amount
+                                },
+                                success: function (response) {
+
+
+                                    console.log(response)
+                                    var options = {
+                                        "key": 'rzp_test_PYui6gTOphErgs',
+
+                                        "amount": response.amount,
+                                        "currency": "INR",
+                                        "name": "cybersquare",
+                                        "description": "Test Transaction",
+                                        "image": "https://cdn.logo.com/hotlink-ok/logo-social.png",
+                                        "id":"1",
+                                        "order_id": response.id,
+
+                                        "handler": function (response) {
+                                            console.log(response)
+                                            console.log(response.razorpay_payment_id)
+                                            console.log(response.razorpay_order_id)
+                                            console.log(response.razorpay_signature_id)
+                                            updatepayment(response)
+                                        },
+                                        //callback_url: "http://127.0.0.1:8000/updatepayment",
+                                        redirect: true,
+
+                                        "theme": {
+                                            "color": "#3399cc"
+                                        }
+                                    };
+                                    var rzp1 = new Razorpay(options);
+
+                                    rzp1.on('payment.failed', function (response) {
+                                        alert(response.error.code);
+                                        alert(response.error.description);
+                                        alert(response.error.source);
+                                        alert(response.error.step);
+                                        alert(response.error.reason);
+                                        // alert(response.error.metadata.order_id);
+                                        alert(response.error.metadata.payment_id);
+                                    })
+                                    rzp1.open();
+                                }
+                            })
+                        })
+
+                        function updatepayment(response) {
+                            console.log(response.razorpay_payment_id)
+                                            console.log(response.razorpay_order_id)
+                                            console.log(response.razorpay_signature_id)
+                            console.log("aaaaaaaaaaaa")
+                            $.ajax({
+                                type: 'GET',
+                                url: "{% url 'common:updatepayment' %}",
+                                
+                                success: function (response) {
+                                    alert("your order placed succesfully")
+                                   window.location.href='http://127.0.0.1:8000/my_orders'
+                                }
+                            })
+                        }
+                    })
+
+
+</script>
+
+{% endblock content%}
+

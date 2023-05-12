@@ -1,0 +1,69 @@
+{% extends 'common/base.html' %}
+{% load static%}
+
+
+
+
+
+{% block content %}
+
+
+
+	
+
+    <table class="table table-striped table-hover m-5">
+            
+        <thead>
+            <tr>
+    
+                <th scope ="col">SNo</th>
+                <th scope ="col">ProductName</th>
+                <th scope ="col">Quantity</th>
+                <th scope ="col">Date</th>
+                <th scope ="col">Payment Type</th>
+
+                <th scope ="col">Status</th>
+                <th scope ="col"></th>
+
+    
+            </tr>
+        </thead>
+        <tbody>
+
+	{% for i in orders %}
+    
+    {% if i.status == 'cancelled' %}
+
+    {% else %}
+
+
+            <tr>
+                <td>{{ forloop.counter}}</td>
+                <td>{{i.productid.product_name }}</td>
+                <td>{{i.quantity }}</td>
+                <td>{{i.date }}</td>
+                <td>{{i.payment_type }}</td>
+
+                <td>{{i.status}}</td>
+                <td><a href="{% url 'common:cancel_order' i.id %}" type="button" class="btn btn-danger">Cancel</a></td>
+                
+
+
+
+            </tr>
+    {% endif %}       
+
+
+    {% endfor %}
+           
+        </tbody>
+    </table>
+
+
+
+
+
+
+{% endblock content %}
+
+		
